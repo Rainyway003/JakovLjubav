@@ -1,0 +1,53 @@
+.heart {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background-color: #ED807F;
+    transform: rotate(-45deg);
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%) rotate(-45deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+    /* Postavi z-index na 0, tako da je srce ispod forme */
+    box-shadow: 10px 10px 20px rgb(77, 14, 14, 0.4);
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background-color: #ED807F;
+    border-radius: 50%;
+    z-index: -1;
+    /* Manji z-index, tako da ne prekriva dugmadi */
+    box-shadow: 20px rgb(77, 14, 14, 0.4);
+}
+
+.heart::before {
+    left: 125px;
+    top: 0;
+}
+
+.heart::after {
+    left: 0;
+    top: -125px;
+}
+
+.form-content {
+    background: transparent;
+    padding: 20px;
+    width: 410px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    /* Veći z-index za formu i dugmadi */
+    transform: rotate(45deg);
+}

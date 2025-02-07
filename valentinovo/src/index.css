@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+html {
+  overflow: hidden;
+}
+
+body {
+  background-image: url('/bg.jpg');
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  color: white;
+  overflow: hidden;
+}
+
+.containers {
+  height: 90vh;
+  width: 80vw;
+  background-color: rgba(237, 128, 127, 0.3);
+  backdrop-filter: blur(19px) saturate(180%);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  display: flex;
+  overflow: hidden;
+}
+
+.loading {
+  padding: 50px;
+  font-size: 36px;
+  border-radius: 10px;
+  background-color: rgba(219, 134, 131, 0.8);
+}
+
+/* Mobiteli jakove */
+@media (max-width: 768px) {
+  html {
+    overflow: hidden;
+  }
+
+  body {
+    overflow: hidden;
+    height: auto;
+    padding: 10px;
+  }
+
+  .containers {
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    flex-direction: column;
+  }
+
+  .loading {
+    padding: 30px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+  }
+}
