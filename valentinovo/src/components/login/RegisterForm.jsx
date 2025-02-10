@@ -40,7 +40,7 @@ const RegisterForm = () => {
                             id="username"
                             name="username"
                             type="text"
-                            className="form-input w-64 h-8 px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600"
+                            className="form-input text-black w-64 h-8 px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600"
                             placeholder="Ime i Prezime"
                             required
                         />
@@ -52,7 +52,7 @@ const RegisterForm = () => {
                             id="email"
                             name="email"
                             type="email"
-                            className="form-input w-44 h-8 px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600"
+                            className="form-input text-black w-44 h-8 px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600"
                             placeholder="Adresa e-pošte"
                             required
                         />
@@ -60,7 +60,7 @@ const RegisterForm = () => {
                             id="number"
                             name="number"
                             type="tel"
-                            className="form-input w-44 h-8 px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600 pr-10"
+                            className="form-input text-black w-44 h-8 px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600 pr-10"
                             placeholder="Broj Telefona"
                             required
                         />
@@ -72,12 +72,12 @@ const RegisterForm = () => {
                             id="password"
                             name="password"
                             type={visible ? "text" : "password"}
-                            className="form-input w-full h-8 px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600 pr-10"
+                            className="form-input text-black w-full h-8 px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600 pr-10"
                             placeholder="Lozinka"
                             required
                         />
                         <div
-                            className="toggle-visibility absolute right-2 top-2 cursor-pointer"
+                            className="toggle-visibility text-black absolute right-2 top-1 cursor-pointer"
                             onClick={toggleVisibility}
                         >
                             {visible ? <HeartFilled /> : <HeartOutlined />}

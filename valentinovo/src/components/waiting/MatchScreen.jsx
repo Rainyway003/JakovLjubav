@@ -71,21 +71,20 @@ const MatchScreen = () => {
 
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-red-300">
-      <div className="bg-white p-8 rounded-lg shadow-lg text-center w-96">
+    <div className="flex items-center justify-center w-full h-full bg-[rgba(237,128,127,0)]">
+      <div className="bg-[rgba(226,127,126,0.2)] text-white p-8 rounded-lg shadow-lg text-center w-96">
         <h2 className="text-2xl font-bold mb-4">Čekanje na partnera...</h2>
 
         {waiting ? (
           <button
             onClick={handleJoinWaitingList}
-            className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-700"
+            className="bg-red-300 text-white p-2 rounded-lg hover:bg-red-400"
           >
             Pridruži se čekanju
           </button>
         ) : matchFound ? (
           <div>
             <h3 className="text-xl text-green-600">Partner pronađen!</h3>
-            <p className="text-lg text-gray-700">Partner je uspješno spojen!</p>
           </div>
         ) : (
           <div>

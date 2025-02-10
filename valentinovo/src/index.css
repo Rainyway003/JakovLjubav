@@ -57,9 +57,10 @@ body {
   .containers {
     overflow: hidden;
     width: 100%;
-    height: auto;
-    padding: 10px;
+    height: 100vh;
+    padding: 0px;
     flex-direction: column;
+    margin-bottom: 50px;
   }
 
   .loading {

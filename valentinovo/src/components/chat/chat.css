@@ -182,3 +182,39 @@
 .bottom input::placeholder {
     color: white;
 }
+
+@media (max-width: 768px) {
+    .chat {
+        flex: 2;
+        border-left: 1px solid #dddddd35;
+        border-right: 1px solid #dddddd35;
+        height: 100vh;
+        /* Postavi chat na punu visinu ekrana */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .center {
+        flex: 1;
+        /* Omogućava da centar ispuni preostali prostor */
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        min-height: 0;
+        /* Sprječava neželjeno rastezanje */
+    }
+
+    /* Ako `body` i `html` nisu podešeni da zauzmu punu visinu, dodaj ovo */
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .bottom {
+        margin-bottom: 60px;
+    }
+
+}

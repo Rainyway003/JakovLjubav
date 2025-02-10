@@ -59,6 +59,7 @@ const Chat = () => {
 
     const handleSend = async () => {
         if (text === "") return;
+        setText("")
         try {
             await updateDoc(doc(db, "chats", chatId), {
                 messages: arrayUnion({

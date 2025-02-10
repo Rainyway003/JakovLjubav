@@ -38,7 +38,7 @@ const LoginForm = () => {
                             id="email"
                             name="email"
                             type="email"
-                            className="form-input w-64 px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600"
+                            className="form-input text-black w-64 px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600"
                             placeholder="Adresa e-pošte"
                             required
                         />
@@ -48,12 +48,12 @@ const LoginForm = () => {
                             id="password"
                             name="password"
                             type={visible ? "text" : "password"}
-                            className="form-input w-full px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600 pr-10"
+                            className="form-input text-black w-full px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600 pr-10"
                             placeholder="Lozinka"
                             required
                         />
                         <div
-                            className="toggle-visibility absolute right-2 top-2 cursor-pointer"
+                            className="toggle-visibility text-black absolute right-2 top-2 cursor-pointer"
                             onClick={toggleVisibility} // Dodajte onClick event
                         >
                             {visible ? <HeartFilled /> : <HeartOutlined />}
@@ -64,12 +64,12 @@ const LoginForm = () => {
                             id="pin"
                             name="pin"
                             type={visible2 ? "text" : "password"}
-                            className="form-input w-full px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600 pr-10"
+                            className="form-input text-black w-full px-3 py-2 mb-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-pink-600 pr-10"
                             placeholder="Pin"
                             required
                         />
                         <div
-                            className="toggle-visibility absolute right-2 top-2 cursor-pointer"
+                            className="toggle-visibility text-black absolute right-2 top-2 cursor-pointer"
                             onClick={toggleVisibility2} // Dodajte onClick event
                         >
                             {visible2 ? <HeartFilled /> : <HeartOutlined />}

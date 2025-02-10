@@ -26,6 +26,7 @@ export const loginScreenAction = async ({ request }) => {
         if (user) {
             console.log("Uspješna prijava:", user);
             return redirect("/");  // Preusmjerenje
+            window.location.reload();
         }
 
         if (!user) {
