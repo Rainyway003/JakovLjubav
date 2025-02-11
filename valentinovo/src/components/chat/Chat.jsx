@@ -1,17 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
 import './chat.css'
 import EmojiPicker from 'emoji-picker-react'
-import { arrayUnion, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore'
+import { arrayUnion, collection, deleteDoc, deleteField, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { auth, db } from "../../lib/firebase"
 import { useChatStore } from '../../lib/chatStore'
 import { useUserStore } from '../../lib/userStore'
 import { useNavigate } from 'react-router'
+import Report from '../waiting/Report'
+import TermsPopup from '../waiting/TermsPopup'
 
 const Chat = () => {
+    const [isOpen, setIsOpen] = useState(true);
     const [chat, setChat] = useState();
-    const [open, setOpen] = useState(false);
     const [text, setText] = useState("");
-
+    const [messageCount, setMessageCount] = useState(0);
+    const [dogovoreno, setDogovoreno] = useState(false)
     const navigate = useNavigate();
     const endRef = useRef(null);
 
@@ -49,17 +52,40 @@ const Chat = () => {
         fetchMatchedChat();
     }, [currentUser, setChatId, changeChat]);
 
+
     useEffect(() => {
         if (!chatId) return;
         const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
             setChat(res.data());
+
+            const userMessages = res.data()?.messages?.filter(msg => msg.senderId === currentUser.id) || [];
+            setMessageCount(userMessages.length);
         });
         return () => unSub();
     }, [chatId]);
 
+
+    useEffect(() => {
+        if (!currentUser?.id) return;
+
+        const userRef = doc(db, "users", currentUser.id);
+
+        const unsubscribe = onSnapshot(userRef, (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                setDogovoreno(data.dogovoreno ?? false);
+            } else {
+                console.log('error')
+            }
+        });
+
+        return () => unsubscribe();
+    }, [currentUser]);
+
+
     const handleSend = async () => {
-        if (text === "") return;
-        setText("")
+        if (text === "" || (dogovoreno === false && messageCount >= 5)) return;
+
         try {
             await updateDoc(doc(db, "chats", chatId), {
                 messages: arrayUnion({
@@ -68,27 +94,61 @@ const Chat = () => {
                     createdAt: new Date(),
                 })
             });
+
+            setText("");
         } catch (err) {
             console.log(err);
         }
     };
+
+
 
     const handleLogout = () => {
         auth.signOut();
         navigate("/login");
     };
 
+    const handleKava = async () => {
+
+        if (dogovoreno == false) {
+            const userRef = doc(db, "users", currentUser.id);
+            setDogovoreno(true);
+
+            try {
+                await updateDoc(userRef, { dogovoreno: true });
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    };
+
+    const handleClose = () => {
+        setIsOpen(false)
+    }
+
     return (
         <div className="chat">
+            {isOpen && <TermsPopup onClose={handleClose} />}
             <div className="top">
                 <div className="user">
-                    <img src="./avatar.png" alt="" />
                     <div className="texts">
-                        <span>{user?.username || "Unknown"}</span>
-                        <p>Lorem ipsum dolor sit amet</p>
+                        <span>{"Nepoznata Osoba"}</span>
+                        {dogovoreno ? (
+                            <p></p>
+                        ) : (
+                            <p>Možeš poslati još {5 - messageCount} poruka.</p>
+                        )}
                     </div>
+                    <Report />
+                    <button
+                        onClick={handleKava}
+                        className={`py-1 px-2 w-16 text-sm rounded-md text-white font-semibold transition duration-300 ease-in-out ${dogovoreno ? "bg-green-400 hover:bg-green-500" : "bg-red-400 hover:bg-red-500"
+                            }`}
+                    >
+                        {dogovoreno ? "✔" : "Kava?☕"}
+                    </button>
                 </div>
-                <div className="icons">
+                <div className="icons pl-4">
                     <button className='Logout' onClick={handleLogout}>Logout</button>
                 </div>
             </div>
@@ -106,12 +166,19 @@ const Chat = () => {
                 <input type="text"
                     value={text}
                     placeholder='Type a message...'
-                    onChange={e => setText(e.target.value)} />
-                <button className='sendButton' onClick={handleSend}>Send</button>
+                    onChange={e => setText(e.target.value)}
+                    disabled={dogovoreno ? false : messageCount >= 5}
+                />
+                <button
+                    className='sendButton'
+                    onClick={handleSend}
+                    disabled={dogovoreno ? false : messageCount >= 5}
+                >
+                    Send
+                </button>
             </div>
         </div>
     );
 };
 
 export default Chat;
-

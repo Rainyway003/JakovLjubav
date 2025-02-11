@@ -114,7 +114,7 @@ const App = () => {
       {currentUser ? (
         <>
           {chatId ? (
-            <Chat /> // Prikazivanje chata ako postoji chatId
+            <Chat />
           ) : (
             // Prikazivanje MatchScreen samo ako nije matchan ili je u čekanju
             waiting && <MatchScreen />
